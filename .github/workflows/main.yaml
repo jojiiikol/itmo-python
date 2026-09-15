@@ -1,0 +1,9 @@
+name: main_CI
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yaml
