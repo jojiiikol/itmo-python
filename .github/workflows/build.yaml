@@ -8,7 +8,7 @@ jobs:
       ubuntu-latest
     steps:
       - name: python_install
-        uses: action/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: '3.14.3'
           cache: 'pip'
