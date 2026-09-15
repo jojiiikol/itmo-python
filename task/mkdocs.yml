@@ -2,3 +2,5 @@ site_name: Task
 nav:
   - Home: index.md
   - Verse: Vladimir.md
+theme:
+  name: material
