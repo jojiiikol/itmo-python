@@ -20,7 +20,14 @@ jobs:
       - name: requirements_install
         run: pip install -r requirements.txt
 
-      - name: test
+      - name: build_static
         run: |
           cd ./task 
           mkdocs build --strict
+
+      - name: push_gh_pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./task/site
+
