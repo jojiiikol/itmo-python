@@ -1,4 +1,4 @@
-name: build
+name: test-build
 on:
   workflow_call:
 
@@ -6,8 +6,6 @@ jobs:
   build:
     runs-on:
       ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: checkout
         uses: actions/checkout@v7
@@ -27,9 +25,8 @@ jobs:
           cd ./task 
           mkdocs build --strict
 
-      - name: push_gh_pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: upload_artifacts
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./task/site
+          path: ./task/site
 
