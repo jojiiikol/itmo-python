@@ -8,7 +8,7 @@ jobs:
   build-test:
     permissions:
       contents: read
-    uses: ./.github/workflows/build.yaml
+    uses: ./.github/workflows/build-test.yaml
 
   deploy-gh:
     needs: build-test
@@ -17,5 +17,12 @@ jobs:
       pages: write
       id-token: write
     uses: ./.github/workflows/deploy_gh.yaml
+
+  build-docker:
+    needs: build-test
+    uses: ./.github/workflows/build-docker.yaml
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
 
 
