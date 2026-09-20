@@ -5,7 +5,7 @@ import pandas as pd
 
 PATH = Path(__file__).resolve().parent.parent / "data" / "for_graphics.csv"
 
-x_min = -200
+x_min = -400
 x_max = 200
 
 def generate():
@@ -13,6 +13,7 @@ def generate():
     y_sin = [math.sin(x) for x in x_list]
     y_cos = [math.cos(x) for x in x_list]
     points = list(zip(x_list, y_sin, y_cos))
+    print("Generate %s point" % len(points))
     return points
 
 def safe_file(points: list[tuple[float, float, float]]):
