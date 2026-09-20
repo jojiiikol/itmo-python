@@ -9,7 +9,7 @@ x_min = -400
 x_max = 200
 
 def generate():
-    x_list = [i * 10 / (x_max - 1) for i in range(-200, x_max)]
+    x_list = [i * 10 / (x_max - 1) for i in range(x_min, x_max)]
     y_sin = [math.sin(x) for x in x_list]
     y_cos = [math.cos(x) for x in x_list]
     points = list(zip(x_list, y_sin, y_cos))
