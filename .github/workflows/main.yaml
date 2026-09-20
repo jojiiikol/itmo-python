@@ -5,7 +5,25 @@ on:
       - 'main'
 
 jobs:
+  check-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      generator_changed: ${{ steps.filter.outputs.generator }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Check
+        uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            generator:
+              - 'task/scripts/generate_data.py'
+
   generate-data:
+    needs: check-changes
+    if: ${{ needs.check-changes.outputs.generator == 'true' && needs.changes.result == 'success' }}
     permissions:
       contents: write
     uses: ./.github/workflows/data_generate.yaml
