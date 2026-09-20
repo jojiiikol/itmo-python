@@ -23,7 +23,7 @@ jobs:
 
   generate-data:
     needs: check-changes
-    if: ${{ needs.check-changes.outputs.generator == 'true' }}
+    if: ${{ needs.check-changes.outputs.generator_changed == 'true' }}
     permissions:
       contents: write
     uses: ./.github/workflows/data_generate.yaml
