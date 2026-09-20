@@ -23,13 +23,14 @@ jobs:
 
   generate-data:
     needs: check-changes
-    if: ${{ needs.check-changes.outputs.generator == 'true' && needs.changes.result == 'success' }}
+    if: ${{ needs.check-changes.outputs.generator == 'true' }}
     permissions:
       contents: write
     uses: ./.github/workflows/data_generate.yaml
 
   build-test:
-    needs: generate-data
+    needs: [ check-changes, generate-data ]
+    if: always() && (needs.generate-data.result == 'success' || needs.generate-data.result == 'skipped')
     permissions:
       contents: read
     uses: ./.github/workflows/build-test.yaml
