@@ -5,12 +5,13 @@ on:
       - 'main'
 
 jobs:
-  generate-date:
+  generate-data:
     permissions:
       contents: write
     uses: ./.github/workflows/data_generate.yaml
 
   build-test:
+    needs: generate-data
     permissions:
       contents: read
     uses: ./.github/workflows/build-test.yaml
