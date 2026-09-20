@@ -5,6 +5,11 @@ on:
       - 'main'
 
 jobs:
+  generate-date:
+    permissions:
+      contents: write
+    uses: ./.github/workflows/data_generate.yaml
+
   build-test:
     permissions:
       contents: read
