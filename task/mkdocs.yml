@@ -2,5 +2,6 @@ site_name: Task
 nav:
   - Home: index.md
   - Verse: Vladimir.md
+  - Сравнения подходов к публикации: comparison.md
 theme:
   name: material
