@@ -5,7 +5,7 @@ import pandas as pd
 
 PATH = Path(__file__).resolve().parent.parent.parent / "data" / "for_graphics.csv"
 
-x_min = -10
+x_min = 0
 x_max = 5
 
 def generate():
