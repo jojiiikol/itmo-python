@@ -43,3 +43,9 @@ def get_graph(points: tuple[list[float], list[float], list[float]]):
 points_x, points_y_sin, points_y_cos = read_data()
 get_graph((points_x, points_y_sin, points_y_cos))
 ```
+
+
+    
+![png](graphics_files/graphics_0_0.png)
+    
+
