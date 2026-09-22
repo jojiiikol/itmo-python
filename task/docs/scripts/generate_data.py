@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 
-PATH = Path(__file__).resolve().parent.parent / "data" / "for_graphics.csv"
+PATH = Path(__file__).resolve().parent.parent.parent / "data" / "for_graphics.csv"
 
 x_min = -1000
 x_max = 1000
