@@ -5,11 +5,12 @@ import pandas as pd
 
 PATH = Path(__file__).resolve().parent.parent.parent / "data" / "for_graphics.csv"
 
-x_min = 0
-x_max = 5
+x_min = -200
+x_max = 10
+N = 500
 
 def generate():
-    x_list = [i * 10 / (x_max - 1) for i in range(x_min, x_max)]
+    x_list = [x_min + i * (x_max - x_min) / (N - 1) for i in range(N)]
     y_sin = [math.sin(x) for x in x_list]
     y_cos = [math.cos(x) for x in x_list]
     points = list(zip(x_list, y_sin, y_cos))
