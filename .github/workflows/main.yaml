@@ -19,7 +19,7 @@ jobs:
         with:
           filters: |
             generator:
-              - 'task/scripts/**'
+              - 'task/docs/scripts/**'
               - 'task/docs/t2.md'
 
   generate-data:

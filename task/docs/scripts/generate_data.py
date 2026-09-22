@@ -5,8 +5,8 @@ import pandas as pd
 
 PATH = Path(__file__).resolve().parent.parent / "data" / "for_graphics.csv"
 
-x_min = -400
-x_max = 200
+x_min = -1000
+x_max = 1000
 
 def generate():
     x_list = [i * 10 / (x_max - 1) for i in range(x_min, x_max)]

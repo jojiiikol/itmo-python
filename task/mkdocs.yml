@@ -6,3 +6,5 @@ nav:
   - T2. Анализ конвейера «эксперимент → артефакт → страница»: t2.md
 theme:
   name: material
+plugins:
+    - mkdocs-jupyter
