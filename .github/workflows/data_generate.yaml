@@ -32,7 +32,7 @@ jobs:
       - name: generate-image
         run: |
           cd ./task
-          jupyter nbconvert scripts/graphics.ipynb --to markdown docs/static/nbconvert_files
+          jupyter nbconvert scripts/graphics.ipynb --to markdown --output-dir docs/static/nbconvert_files
 
       - name: Commit changes
         run: |
