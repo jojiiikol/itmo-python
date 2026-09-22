@@ -11,3 +11,4 @@ plugins:
     - mkdocs-jupyter:
           include: ["*.ipynb"]
           execute: true
+          cache: false
