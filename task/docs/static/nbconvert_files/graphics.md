@@ -3,10 +3,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
-```
 
-
-```python
 PATH = Path(os.getcwd()).parent.parent / "data" / "for_graphics.csv"
 SAVE_PATH = Path(os.getcwd()).parent.parent / "docs" / "static" / "images" / "static_notebook.png"
 
@@ -17,6 +14,7 @@ def read_data() -> tuple[list[float], list[float], list[float]]:
     points_y_sin = df["y_sin"]
     points_y_cos = df["y_cos"]
     return points_x, points_y_sin, points_y_cos
+
 
 def get_graph(points: tuple[list[float], list[float], list[float]]):
     plt.style.use('default')
@@ -40,10 +38,8 @@ def get_graph(points: tuple[list[float], list[float], list[float]]):
 
     plt.savefig(SAVE_PATH)
     plt.show()
+
+
 points_x, points_y_sin, points_y_cos = read_data()
-```
-
-
-```python
 get_graph((points_x, points_y_sin, points_y_cos))
 ```
