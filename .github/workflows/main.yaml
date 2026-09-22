@@ -19,7 +19,8 @@ jobs:
         with:
           filters: |
             generator:
-              - 'task/scripts/generate_data.py'
+              - 'task/scripts/**'
+              - 'task/docs/t2.md'
 
   generate-data:
     needs: check-changes

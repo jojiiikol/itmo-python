@@ -24,10 +24,15 @@ jobs:
       - name: requirements_install
         run: pip install -r requirements.txt
 
-      - name: generate
+      - name: generate-data
         run: |
           cd ./task 
           python scripts/generate_data.py
+
+      - name: generate-image
+        run: |
+          cd ./task
+          jupyter nbconvert scripts/graphics.ipynb --to markdown docs/static/nbconvert_files
 
       - name: Commit changes
         run: |
