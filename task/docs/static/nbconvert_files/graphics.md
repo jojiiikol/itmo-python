@@ -8,8 +8,8 @@ import pandas as pd
 
 ```python
 
-PATH = Path(os.getcwd()).parent / "data" / "for_graphics.csv"
-SAVE_PATH = Path(os.getcwd()).parent / "docs" / "static" / "images" / "static_notebook.png"
+PATH = Path(os.getcwd()).parent.parent / "data" / "for_graphics.csv"
+SAVE_PATH = Path(os.getcwd()).parent.parent / "docs" / "static" / "images" / "static_notebook.png"
 
 
 def read_data() -> tuple[list[float], list[float], list[float]]:
