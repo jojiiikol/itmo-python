@@ -30,10 +30,10 @@ jobs:
 #    uses: ./.gitverse/workflows/data_generate.yaml
 
   build-test:
-    needs: [ check-changes ]
+    needs: check-changes
 #    if: always() && (needs.generate-data.result == 'success' || needs.generate-data.result == 'skipped')
-    permissions:
-      contents: read
+#    permissions:
+#      contents: read
     uses: ./.gitverse/workflows/build-test.yaml
 
   deploy-gh:
