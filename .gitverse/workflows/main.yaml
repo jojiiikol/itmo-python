@@ -47,7 +47,7 @@ jobs:
           mkdocs build --strict
 
       - name: upload_artifacts
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v1
         with:
           path: ./task/site
 
@@ -62,6 +62,6 @@ jobs:
     steps:
       - name: deploy_to_pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v1
 
 
