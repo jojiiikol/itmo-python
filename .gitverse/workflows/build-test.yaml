@@ -10,7 +10,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ gitverse.ref_name }}
 
       - name: python_install
         uses: actions/setup-python@v7
