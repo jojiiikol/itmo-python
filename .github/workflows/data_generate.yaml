@@ -29,10 +29,17 @@ jobs:
           cd ./task 
           python docs/scripts/generate_data.py
 
-      - name: generate-image
+      - name: nbconvert
         run: |
           cd ./task
           jupyter nbconvert --execute docs/scripts/graphics.ipynb --to markdown --output-dir docs/static/nbconvert_files
+
+      - name: papermill
+        run: |
+          cd ./task
+          papermill docs/scripts/parametrize_graphics.ipynb docs/scripts/parametrize_graphics_1.ipynb -p X_MIN -600 -p X_MAX 5 -p N 100
+          papermill docs/scripts/parametrize_graphics.ipynb docs/scripts/parametrize_graphics_2.ipynb -p X_MIN -10 -p X_MAX 10 -p N 2
+          papermill docs/scripts/parametrize_graphics.ipynb docs/scripts/parametrize_graphics_3.ipynb -p X_MIN -100 -p X_MAX 100 -p N 10
 
       - name: Commit changes
         run: |

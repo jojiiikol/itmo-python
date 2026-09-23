@@ -4,7 +4,6 @@ nav:
   - Verse: Vladimir.md
   - Сравнения подходов к публикации: comparison.md
   - T2. Анализ конвейера «эксперимент → артефакт → страница»: t2.md
-  - jupyter: scripts/graphics.ipynb
 theme:
   name: material
 plugins:
