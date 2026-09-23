@@ -1,0 +1,54 @@
+name: main_CI
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  check-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      generator_changed: ${{ steps.filter.outputs.generator }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Check
+        uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            generator:
+              - 'task/docs/scripts/**'
+              - 'task/docs/t2.md'
+
+  generate-data:
+    needs: check-changes
+    if: ${{ needs.check-changes.outputs.generator_changed == 'true' }}
+    permissions:
+      contents: write
+    uses: ./.github/workflows/data_generate.yaml
+
+  build-test:
+    needs: [ check-changes, generate-data ]
+    if: always() && (needs.generate-data.result == 'success' || needs.generate-data.result == 'skipped')
+    permissions:
+      contents: read
+    uses: ./.github/workflows/build-test.yaml
+
+  deploy-gh:
+    needs: build-test
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy_gh.yaml
+
+  build-docker:
+    needs: build-test
+    uses: ./.github/workflows/build-docker.yaml
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
+
