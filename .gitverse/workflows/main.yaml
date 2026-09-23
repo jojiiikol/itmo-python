@@ -22,6 +22,7 @@ jobs:
               - 'task/docs/scripts/**'
               - 'task/docs/t2.md'
   build-test:
+    needs: check-changes
     runs-on:
       ubuntu-latest
     steps:
@@ -50,26 +51,17 @@ jobs:
         with:
           path: ./task/site
 
-#  build-test:
-#    needs: check-changes
-##    if: always() && (needs.generate-data.result == 'success' || needs.generate-data.result == 'skipped')
-##    permissions:
-##      contents: read
-#    uses: ./.gitverse/workflows/build-test.yaml
 
   deploy-gh:
     needs: build-test
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    uses: ./.gitverse/workflows/deploy_gh.yaml
-
-  build-docker:
-    needs: build-test
-    uses: ./.gitverse/workflows/build-docker.yaml
-    secrets:
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on:
+      ubuntu-latest
+    steps:
+      - name: deploy_to_pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
 
