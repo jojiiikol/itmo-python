@@ -27,14 +27,14 @@ jobs:
     if: ${{ needs.check-changes.outputs.generator_changed == 'true' }}
     permissions:
       contents: write
-    uses: ./.github/workflows/data_generate.yaml
+    uses: ./.gitverse/workflows/data_generate.yaml
 
   build-test:
     needs: [ check-changes, generate-data ]
     if: always() && (needs.generate-data.result == 'success' || needs.generate-data.result == 'skipped')
     permissions:
       contents: read
-    uses: ./.github/workflows/build-test.yaml
+    uses: ./.gitverse/workflows/build-test.yaml
 
   deploy-gh:
     needs: build-test
@@ -42,11 +42,11 @@ jobs:
       contents: read
       pages: write
       id-token: write
-    uses: ./.github/workflows/deploy_gh.yaml
+    uses: ./.gitverse/workflows/deploy_gh.yaml
 
   build-docker:
     needs: build-test
-    uses: ./.github/workflows/build-docker.yaml
+    uses: ./.gitverse/workflows/build-docker.yaml
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
