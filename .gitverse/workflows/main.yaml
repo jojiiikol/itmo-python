@@ -22,12 +22,12 @@ jobs:
               - 'task/docs/scripts/**'
               - 'task/docs/t2.md'
 
-  generate-data:
-    needs: check-changes
-    if: ${{ needs.check-changes.outputs.generator_changed == 'true' }}
-    permissions:
-      contents: write
-    uses: ./.gitverse/workflows/data_generate.yaml
+#  generate-data:
+#    needs: check-changes
+#    if: ${{ needs.check-changes.outputs.generator_changed == 'true' }}
+#    permissions:
+#      contents: write
+#    uses: ./.gitverse/workflows/data_generate.yaml
 
   build-test:
     needs: [ check-changes, generate-data ]
