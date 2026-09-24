@@ -57,11 +57,7 @@ jobs:
     runs-on:
       ubuntu-latest
     steps:
-      - name: setup go
-        uses: actions/setup-go@v4
-        with:
-          go-version: '>=1.23'
       - name: Deploy to Pages
-        uses: actions/deploy-pages@v1
+        uses: gitverse/deploy-pages@v1
 
 
