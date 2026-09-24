@@ -47,21 +47,17 @@ jobs:
           mkdocs build --strict
 
       - name: upload_artifacts
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v1.0.0
         with:
           path: ./task/site
 
 
   deploy-gh:
     needs: build-test
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on:
       ubuntu-latest
     steps:
       - name: deploy_to_pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v1.0.0
 
 
