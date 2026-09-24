@@ -6,7 +6,7 @@ on:
 # tst
 jobs:
   check-changes:
-    runs-on: my_runner
+    runs-on: img-ubuntu-latest
     outputs:
       generator_changed: ${{ steps.filter.outputs.generator }}
     steps:
@@ -24,7 +24,7 @@ jobs:
   build-test:
     needs: check-changes
     runs-on:
-      my_runner
+      img-ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v7
@@ -55,14 +55,13 @@ jobs:
   deploy-gh:
     needs: build-test
     runs-on:
-      my_runner
+      img-ubuntu-latest
     steps:
-      steps:
-        - name: setup go
-          uses: actions/setup-go@v4
-          with:
-            go-version: '>=1.23'
-        - name: Deploy to Pages
-          uses: actions/deploy-pages@v1
+      - name: setup go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '>=1.23'
+      - name: Deploy to Pages
+        uses: actions/deploy-pages@v1
 
 
