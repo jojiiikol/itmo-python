@@ -6,7 +6,7 @@ on:
 # tst
 jobs:
   check-changes:
-    runs-on: self-hosted
+    runs-on: my_runner
     outputs:
       generator_changed: ${{ steps.filter.outputs.generator }}
     steps:
@@ -24,7 +24,7 @@ jobs:
   build-test:
     needs: check-changes
     runs-on:
-      self-hosted
+      my_runner
     steps:
       - name: checkout
         uses: actions/checkout@v7
@@ -55,7 +55,7 @@ jobs:
   deploy-gh:
     needs: build-test
     runs-on:
-      self-hosted
+      my_runner
     steps:
       steps:
         - name: setup go
