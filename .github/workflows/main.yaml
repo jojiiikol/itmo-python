@@ -2,7 +2,7 @@ name: main_CI
 on:
   push:
     branches:
-      - 'main'
+      - '**'
     paths-ignore:
       - '.gitverse/**'
 
@@ -40,6 +40,7 @@ jobs:
 
   deploy-gh:
     needs: build-test
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: read
       pages: write
@@ -48,6 +49,7 @@ jobs:
 
   build-docker:
     needs: build-test
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/build-docker.yaml
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
