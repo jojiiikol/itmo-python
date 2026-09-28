@@ -1,10 +1,16 @@
-name: build-docker
+name: build-hosting
 on:
   workflow_call:
     secrets:
       DOCKER_USERNAME:
         required: true
       DOCKER_TOKEN:
+        required: true
+      SSH_DEPLOY_KEY:
+        required: true
+      SSH_HOST:
+        required: true
+      SSH_USER:
         required: true
 
 jobs:
@@ -34,5 +40,20 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: ${{ secrets.DOCKER_USERNAME }}/mkdocs-task:${{ github.sha }}
+
+      - name: Deploy with SSH
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+          ssh "$SSH_USER@$SSH_HOST" '
+            docker run -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/mkdocs-task:${{ github.sha }}
+          '
 
 

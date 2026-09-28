@@ -2,7 +2,7 @@ name: main_CI
 on:
   push:
     branches:
-      - 'main'
+      - '**'
 # tst
 jobs:
   check-changes:
@@ -21,6 +21,8 @@ jobs:
             generator:
               - 'task/docs/scripts/**'
               - 'task/docs/t2.md'
+            
+
   build-test:
     needs: check-changes
     runs-on:
