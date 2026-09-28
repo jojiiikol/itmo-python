@@ -6,7 +6,7 @@ import pandas as pd
 PATH = Path(__file__).resolve().parent.parent.parent / "data" / "for_graphics.csv"
 
 x_min = -1000
-x_max = 5
+x_max = 1
 N = 35
 
 def generate():
