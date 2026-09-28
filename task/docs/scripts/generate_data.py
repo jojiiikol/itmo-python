@@ -7,7 +7,7 @@ PATH = Path(__file__).resolve().parent.parent.parent / "data" / "for_graphics.cs
 
 x_min = -1000
 x_max = 1
-N = 35
+N = 34
 
 def generate():
     x_list = [x_min + i * (x_max - x_min) / (N - 1) for i in range(N)]
