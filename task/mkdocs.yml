@@ -5,6 +5,7 @@ nav:
   - Verse: Vladimir.md
   - Сравнения подходов к публикации: comparison.md
   - T2. Анализ конвейера «эксперимент → артефакт → страница»: t2.md
+  - P1. CI/CD-пайплайн на отечественном сервисе: p1.md
 theme:
   name: material
   language: ru
