@@ -105,7 +105,7 @@ jobs:
 
   deploy-gh:
     needs: build-test
-    if: always() && needs.build-test.result == 'success' && gitverse.ref == 'refs/heads/main'
+    if: ${{ always() && needs.build-test.result == 'success' && github.ref == 'refs/heads/main' }}
     runs-on:
       ubuntu-latest
     steps:
