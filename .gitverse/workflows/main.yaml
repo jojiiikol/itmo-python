@@ -174,5 +174,6 @@ jobs:
             docker stop mkdocs-app-gitverse 2>/dev/null || true
             docker rm mkdocs-app-gitverse 2>/dev/null || true
             docker run -d -p 7000:7000 --name mkdocs-app-gitverse ${{ secrets.DOCKER_USERNAME }}/mkdocs-app-gitverse:${{ gitverse.sha }}
+          '
 
 
