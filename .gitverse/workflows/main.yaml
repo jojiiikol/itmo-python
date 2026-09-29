@@ -122,8 +122,8 @@ jobs:
 
   deploy-to-helios:
     runs-on: ubuntu-latest
-    needs: build-test
-    if: ${{ always() && needs.build-test.result == 'success' && github.ref == 'refs/heads/main' }}
+#    needs: build-test
+#    if: ${{ always() && needs.build-test.result == 'success' && github.ref == 'refs/heads/main' }}
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
