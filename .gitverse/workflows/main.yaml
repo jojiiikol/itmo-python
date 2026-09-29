@@ -131,20 +131,13 @@ jobs:
           name: gitverse-pages
           path: ./site-artifact
 
-      - name: Unpack site artifact
-        run: |
-          cd /workspace/jojiikol/itmo-python/site-artifact
-          ls -all
-#          mkdir -p ./site-files
-#          tar -xvf ./site-artifact/artifact.tar -C ./site-files
-
-#      - name: Copy files via SCP
-#        uses: appleboy/scp-action@v0.1.7
-#        with:
-#          host: ${{ secrets.HELIOS_HOST }}
-#          username: ${{ secrets.HELIOS_USER }}
-#          key: ${{ secrets.HELIOS_SSH_KEY }}
-#          port: ${{ 2222 }}
-#          source: "./site-files/*"
-#          target: "./public_html/mkdocs"
-#          strip_prefix: "site-files"
+      - name: Copy files via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HELIOS_HOST }}
+          username: ${{ secrets.HELIOS_USER }}
+          key: ${{ secrets.HELIOS_SSH_KEY }}
+          port: ${{ 2222 }}
+          source: "./workspace/jojiikol/itmo-python/site-artifact/*"
+          target: "./public_html/mkdocs"
+          strip_prefix: "site-files"
