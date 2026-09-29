@@ -137,7 +137,7 @@ jobs:
           host: ${{ secrets.HELIOS_HOST }}
           username: ${{ secrets.HELIOS_USER }}
           key: ${{ secrets.HELIOS_SSH_KEY }}
-          port: ${{ 2222 }}
-          source: "./workspace/jojiikol/itmo-python/site-artifact/*"
+          port: 2222
+          source: "site-artifact/*"
           target: "./public_html/mkdocs"
-          strip_prefix: "site-files"
+          strip_prefix: "site-artifact"
