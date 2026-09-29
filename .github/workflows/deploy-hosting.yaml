@@ -53,7 +53,9 @@ jobs:
           ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
 
           ssh "$SSH_USER@$SSH_HOST" '
-            docker run -d -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/mkdocs-task:${{ github.sha }}
+            docker stop mkdocs-app 2>/dev/null || true
+            docker rm mkdocs-app 2>/dev/null || true
+            docker run -d -p 8000:8000 --name mkdocs-app ${{ secrets.DOCKER_USERNAME }}/mkdocs-task:${{ github.sha }}
           '
 
 

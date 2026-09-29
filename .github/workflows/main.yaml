@@ -7,16 +7,6 @@ on:
       - '.gitverse/**'
 
 jobs:
-  deploy-hosting:
-    if: github.ref == 'refs/heads/main'
-    uses: ./.github/workflows/deploy-hosting.yaml
-    secrets:
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-      SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-      SSH_USER: ${{ secrets.SSH_USER }}
-      SSH_HOST: ${{ secrets.SSH_HOST }}
-
 
   check-changes:
     runs-on: ubuntu-latest
@@ -58,15 +48,15 @@ jobs:
       id-token: write
     uses: ./.github/workflows/deploy_gh.yaml
 
-#  deploy-hosting:
-#    needs: build-test
-#    if: always() && needs.build-test.result == 'success' && github.ref == 'refs/heads/main'
-#    uses: ./.github/workflows/deploy-hosting.yaml
-#    secrets:
-#      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-#      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-#      SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-#      SSH_USER: ${{ secrets.SSH_USER }}
-#      SSH_HOST: ${{ secrets.SSH_HOST }}
+  deploy-hosting:
+    needs: build-test
+    if: always() && needs.build-test.result == 'success' && github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy-hosting.yaml
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+      SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_HOST: ${{ secrets.SSH_HOST }}
 
 

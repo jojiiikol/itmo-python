@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - '**'
-# tst
+
 jobs:
   check-changes:
     runs-on: ubuntu-latest
@@ -21,10 +21,59 @@ jobs:
             generator:
               - 'task/docs/scripts/**'
               - 'task/docs/t2.md'
+
+    generate:
+      needs: check-changes
+      if: ${{ needs.check-changes.outputs.generator_changed == 'true' }}
+      permissions:
+        contents: write
+      runs-on:
+        ubuntu-latest
+
+      steps:
+        - name: checkout
+          uses: actions/checkout@v7
+
+        - name: python_install
+          uses: actions/setup-python@v7
+          with:
+            python-version: '3.14.3'
+            cache: 'pip'
+            cache-dependency-path: ./requirements.txt
+
+        - name: requirements_install
+          run: pip install -r requirements.txt
+
+        - name: generate-data
+          run: |
+            cd ./task 
+            python docs/scripts/generate_data.py
+
+        - name: nbconvert
+          run: |
+            cd ./task
+            jupyter nbconvert --execute docs/scripts/graphics.ipynb --to markdown --output-dir docs/static/nbconvert_files
+
+        - name: papermill
+          run: |
+            cd ./task
+            papermill docs/scripts/parametrize_graphics.ipynb docs/scripts/parametrize_graphics_1.ipynb -p X_MIN -600 -p X_MAX 5 -p N 100
+            papermill docs/scripts/parametrize_graphics.ipynb docs/scripts/parametrize_graphics_2.ipynb -p X_MIN -10 -p X_MAX 10 -p N 2
+            papermill docs/scripts/parametrize_graphics.ipynb docs/scripts/parametrize_graphics_3.ipynb -p X_MIN -100 -p X_MAX 100 -p N 10
+
+        - name: Commit changes
+          run: |
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git add .
+            git diff --quiet && git diff --staged --quiet || git commit -m "generate data: generate new data [skip ci]"
+            git push
+
             
 
   build-test:
-    needs: check-changes
+    needs: [ check-changes, generate-data ]
+    if: always() && (needs.generate-data.result == 'success' || needs.generate-data.result == 'skipped')
     runs-on:
       ubuntu-latest
     steps:
@@ -56,6 +105,7 @@ jobs:
 
   deploy-gh:
     needs: build-test
+    if: always() && needs.build-test.result == 'success' && gitverse.ref == 'refs/heads/main'
     runs-on:
       ubuntu-latest
     steps:
