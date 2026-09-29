@@ -22,7 +22,7 @@ jobs:
               - 'task/docs/scripts/**'
               - 'task/docs/t2.md'
 
-  generate:
+  generate-data:
     runs-on: ubuntu-latest
     needs: check-changes
     if: ${{ needs.check-changes.outputs.generator_changed == 'true' }}
