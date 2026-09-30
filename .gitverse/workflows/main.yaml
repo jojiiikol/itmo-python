@@ -139,5 +139,5 @@ jobs:
           key: ${{ secrets.HELIOS_SSH_KEY }}
           port: 2222
           source: "site-artifact/**"
-          target: "./public_html/mkdocs"
+          target: "./public_html"
           strip_prefix: "site-artifact"
