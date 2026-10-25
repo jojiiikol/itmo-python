@@ -7,6 +7,7 @@ nav:
   - P1. CI/CD-пайплайн на отечественном сервисе: p1.md
   - P4. Развёртывание на Helios с контролем качества доставки: p4.md
   - Hermes. Развертывание ИИ агента: agent.md
+  - Экспериментальный стенд: analyze_articles.md
 theme:
   name: material
   language: ru
