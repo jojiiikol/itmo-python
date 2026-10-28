@@ -34,6 +34,11 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
