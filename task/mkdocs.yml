@@ -14,6 +14,7 @@ theme:
 
 plugins:
   - search
+  - mermaid2
   - mkdocs-jupyter:
       include: ["*.ipynb"]
       execute: true
